@@ -26,32 +26,27 @@ namespace EmployeeManagement
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
-                                ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            //DefaultFilesOptions options = new DefaultFilesOptions();
+            //options.DefaultFileNames.Clear();
+            //options.DefaultFileNames.Add("foo.html");
+            //app.UseDefaultFiles(options);
+            //app.UseStaticFiles();
 
-            app.Use(async (context, next) =>
-            {
-                logger.LogInformation("M1 Incoming request");
-                await next();
-                logger.LogInformation("M1 Outgoing response");
-            });
 
-            app.Use(async (context, next) =>
-            {
-                logger.LogInformation("M2 Incoming request");
-                await next();
-                logger.LogInformation("M2 Outgoing response");
-            });
+            FileServerOptions options = new FileServerOptions();
+            options.DefaultFilesOptions.DefaultFileNames.Clear();
+            options.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
+            app.UseFileServer(options);
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("M3 Request handled and response produced");
-                logger.LogInformation("M3 Request handled and response produced");
+                await context.Response.WriteAsync("Hello World !");
             });
         }
     }
