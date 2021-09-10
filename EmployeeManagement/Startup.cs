@@ -27,7 +27,8 @@ namespace EmployeeManagement
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response
+                .WriteAsync($"The current process used {System.Diagnostics.Process.GetCurrentProcess().ProcessName}");
             });
         }
     }
