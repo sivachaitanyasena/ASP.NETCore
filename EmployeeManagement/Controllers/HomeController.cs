@@ -18,6 +18,11 @@ namespace EmployeeManagement.Controllers
         {
             return _employeeRepository.GetEmployee(101).Name;
         }
+        public ObjectResult Details()
+        {
+            Employee model = _employeeRepository.GetEmployee(101);
+            return new ObjectResult(model);// _employeeRepository.GetEmployee(101).Name;
+        }
     }
     //public class HomeController : Controller
     //{
