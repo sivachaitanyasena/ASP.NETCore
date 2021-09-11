@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,14 @@ namespace EmployeeManagement.Controllers
 {
     public class HomeController
     {
+        IEmployeeRepository _employeeRepository;
+        public HomeController(IEmployeeRepository employeeRepository)
+        {
+            _employeeRepository = employeeRepository;
+        }
         public string Index()
         {
-            return "Hello from MVC";
+            return _employeeRepository.GetEmployee(101).Name;
         }
     }
     //public class HomeController : Controller
