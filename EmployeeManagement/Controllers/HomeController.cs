@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
         IEmployeeRepository _employeeRepository;
         public HomeController(IEmployeeRepository employeeRepository)
@@ -18,10 +18,10 @@ namespace EmployeeManagement.Controllers
         {
             return _employeeRepository.GetEmployee(101).Name;
         }
-        public ObjectResult Details()
+        public ViewResult Details()
         {
             Employee model = _employeeRepository.GetEmployee(101);
-            return new ObjectResult(model);// _employeeRepository.GetEmployee(101).Name;
+            return View(model);// _employeeRepository.GetEmployee(101).Name;
         }
     }
     //public class HomeController : Controller
